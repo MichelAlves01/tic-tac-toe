@@ -2,7 +2,7 @@ name: Game Michel Alves
 on:
   push:
     branches:
-      - "master"
+      - "main"
 
 jobs:
   build:
