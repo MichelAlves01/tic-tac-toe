@@ -9,7 +9,7 @@ function App() {
   const reset = () => {
     setBoard(Array(3).fill(null).map(() => Array(3).fill(null)));
     setWinner('')
-    setTurn('X')
+    setTurn(Math.random(2) > 0.5 ? 'X' : 'O');
   }
 
   const play = (i, j) => {
@@ -21,12 +21,10 @@ function App() {
     let countMatchDiagonalLeft = 0;
     let countMatchDiagonalRight = 0;
     let diagonalRightIndex = 2;
-    let countMatchX = 0;
-    let countMatchY = 0;
-
+    
     for (let i=0 ; i<3 ; i++) {
-      countMatchX = 0;
-      countMatchX = 0;
+      let countMatchX = 0;
+      let countMatchY = 0;
 
       for (let j=0 ; j<3 ; j++) {
         
@@ -60,8 +58,12 @@ function App() {
   }, [])
 
   return (
-    <Fragment>
-      <span>Turn { turn }</span>
+    <div className='game-container'>
+      <h1>Tic Tac Toe</h1>
+      { winner &&
+      <span>{ winner !== '' && <h2>The winner is <br />
+      <span className={winner}>{ winner }</span> 🙌</h2>}</span> 
+      || <h2>Turn {turn}</h2> }
       <div className='board'>
         { board.map((row, i) => {
             return <div className='board-row' key={i}>
@@ -76,11 +78,9 @@ function App() {
             </div>
           })
         }
-
       </div>
-
-      <span>{ winner !== '' && <span>'The winner is ' winner </span>}</span>
-    </Fragment>
+      { winner !==  '' && <button onClick={() => reset()} className='start-button'>Start New</button> }
+    </div>
   );
 }
 
