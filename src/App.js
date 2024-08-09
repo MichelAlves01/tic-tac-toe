@@ -1,5 +1,5 @@
 import './App.css';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   let [turn, setTurn] = useState('X');
@@ -61,10 +61,9 @@ function App() {
     <div className='game-container'>
       <h1>Tic Tac Toe</h1>
       { winner &&
-      <span>{ winner !== '' && <h2>The winner is <br />
-      <span className={winner}>{ winner }</span> 🙌</h2>}</span> 
-      || <h2>Turn {turn}</h2> }
-      <div className='board'>
+      <span>{ winner !== '' && <h2>The winner is <br /><span className={winner}>{ winner }</span> 🙌</h2>}</span>  }
+      { winner && <h2>Turn {turn}</h2> }
+        <div className='board'>
         { board.map((row, i) => {
             return <div className='board-row' key={i}>
               { row.map((cell, j) => {
